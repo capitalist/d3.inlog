@@ -5,9 +5,13 @@ Understand what's going on under the hood of your monster d3 method chains.
 
 Usage
 =======
-1. Include it: `<script type="text/javascript" src="d3.inlog.js"></script>`
+1. Include it: `<script type="text/javascript" src="https://raw.github.com/capitalist/d3.inlog/master/d3.inlog.js"></script>`
 2. Enable it: `d3.inlog(true)`
 3. Shut it back off: `d3.inlog(false)`
+
+Example
+=======
+<div class="thumbnail"><a href="https://skitch.com/capitalist/ginma/area-chart"><img src="https://img.skitch.com/20111231-1kteq531u4fe4fk4w87j1nf7cy.preview.jpg" alt="Area Chart" /></a></div>
 
 Warnings
 =======

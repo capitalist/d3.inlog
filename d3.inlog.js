@@ -1,5 +1,5 @@
 (function() {
-  var att, createReplacementFunction, defaults, inject, isFunction, logFunctionCall, logFunctionCallAlt, logTrace, maintrace, settings, subtrace, tracedepth, _d3;
+  var att, createReplacementFunction, defaults, inject, isFunction, logFunctionCall, logFunctionCallAlt, logTrace, maintrace, settings, subtrace, thisType, tracedepth;
 
   defaults = {
     enabled: false,
@@ -8,8 +8,6 @@
     thisValue: true,
     returnValue: true
   };
-
-  _d3 = d3;
 
   settings = {};
 
@@ -87,9 +85,7 @@
     formatString = "";
     i = 0;
     package_name = false;
-    if (origThis === d3) package_name = 'd3';
-    if (origThis === d3.scale) package_name = 'd3.scale';
-    console.groupCollapsed("" + (package_name || 'Function Call') + ": " + funcName);
+    console.groupCollapsed("" + (thisType(origThis)) + ": " + funcName);
     if (settings.thisValue) {
       console.groupCollapsed('this');
       console.log.apply(console, ["%o", origThis]);
@@ -123,11 +119,25 @@
     return console.groupEnd(funcName);
   };
 
+  thisType = function(_this) {
+    if (_this === window) return 'window';
+    if (_this === d3) return 'd3';
+    if (_this === d3.scale) return 'd3.scale';
+    if ((_this.domain != null) && (_this.range != null) && (_this.ticks != null)) {
+      return 'd3.scale.linear';
+    }
+    if ((_this.classed != null) && (_this.data != null) && (_this.enter != null)) {
+      return 'd3.selection(update)';
+    }
+    if ((_this.classed != null) && (_this.data != null)) return 'd3.selection';
+    return 'Function Call';
+  };
+
   /*
   # Outputs the stack trace to console.
   # Basically simple tree traversing.
   #
-  # @param trace The JSON Object with the trace info
+  # @param trace The object with the trace info
   # @returns undefined
   */
 

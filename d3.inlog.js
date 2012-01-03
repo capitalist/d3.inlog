@@ -123,6 +123,7 @@
     if (_this === window) return 'window';
     if (_this === d3) return 'd3';
     if (_this === d3.scale) return 'd3.scale';
+    if (_this === d3.csv) return 'd3.csv';
     if ((_this.domain != null) && (_this.range != null) && (_this.ticks != null)) {
       return 'd3.scale.linear';
     }
@@ -130,6 +131,7 @@
       return 'd3.selection(update)';
     }
     if ((_this.classed != null) && (_this.data != null)) return 'd3.selection';
+    if ((_this.delay != null) && (_this.duration != null)) return 'd3.transition';
     return 'Function Call';
   };
 
@@ -209,8 +211,8 @@
     if (list == null) list = [];
     if (inverted == null) inverted = false;
     list = "," + (list || []).join(",") + ",";
-    if (obj.__inlog__ != null) return;
-    obj.__inlog__ = true;
+    if ((obj != null ? obj.__inlog__ : void 0) != null) return;
+    if (obj != null) obj.__inlog__ = true;
     _results = [];
     for (prop in obj) {
       _results.push((function(prop) {
@@ -230,6 +232,8 @@
 
   inject(d3.scale);
 
-  inject(d3);
+  inject(d3.csv);
+
+  inject(d3, ['csv']);
 
 }).call(this);

@@ -16,6 +16,7 @@ Example
 Warnings
 =======
 This sucker spews a lot of console messages. 
+It will make your transitions choppy if you leave it on during transitions.
 
 TODO
 ========

@@ -234,6 +234,8 @@
 
   inject(d3.csv);
 
-  inject(d3, ['csv']);
+  inject(d3.json);
+
+  inject(d3, ['csv', 'json']);
 
 }).call(this);
